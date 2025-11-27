@@ -1761,6 +1761,11 @@ function simulateBattle(){
       game.stats.petCount++;
       if(!game.activePetId) game.activePetId=pet.id;
       addGlobalLog('你收服了新的灵宠「'+pet.name+'」。');
+      // 宗门任务：收服灵宠进度
+      game.sect.tasks.forEach(t=>{
+        if(t.type === 'pet' && t.progress < t.need){
+          t.progress++;
+        }
     }
     // 灵宠经验
     if(pet){
