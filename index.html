@@ -1801,10 +1801,10 @@ function tick(){
       if(battleCooldown<0) battleCooldown=0;
     }
   }else{
-    // 不挂机时，缓慢吐纳获得极少灵气
+    // 不挂机时，每秒大约 +1 点灵气（固定值）
     const p=game.player;
-    const base=(0.4 + p.root*0.10) * (TICK_MS/1000);
-    p.qi+=base*(p.qiMul||1);
+    const base = 1 * (TICK_MS/1000); // TICK_MS=400ms，所以每 tick 加 0.4
+    p.qi += base;                    // 不再乘 qiMul，保证是固定速度
     if(p.qi>getRealmObj().qi) p.qi=getRealmObj().qi;
     updateRoleUI();
   }
